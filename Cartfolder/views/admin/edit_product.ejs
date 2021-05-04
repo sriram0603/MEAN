@@ -1,0 +1,61 @@
+<%- include ("../_layout/adminHeader.ejs") %> 
+<h2 class="page-title">Edit Product</h2>
+<a href="/admin/products" class="btn btn-primary">Back to all Products</a>
+<br><br>
+<form method="post" action="/admin/products/edit-product/<%= id %>" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="">Title</label>
+        <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <label for="">Description</label>
+        <textarea name="desc" class="form-control" col="30" rows="10" placeholder="Description"><%= desc %></textarea>    
+    </div>
+    <div class="form-group">
+        <label for="">Category</label>
+        <select name="category" class="form-control">
+            <% categories.forEach(function(cat) { %>
+            <option value="<%= cat.title %>"
+                <% if (cat.title == category) { %>
+                    selected="selected"
+                    <% } %>
+                ><%= cat.title %></option>
+            <% }); %>
+        </select>    
+    </div>
+    <div class="form-group">
+        <label for="">Price</label>
+        <input type="text" class="form-control" name="price" value="<%= price %>" placeholder="Price">
+    </div>
+    <div class="form-group">
+        <label for="">Current Image</label>
+        <p>
+            <% if (image=="") { %>
+                <img id="ig" src="/images/noimage.png" alt="">
+                <% } else { %>
+                <img id="ig" src="/product_images/<%= id %>/<%= image %>" alt="">
+                    <% } %>
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="">Upload Image</label>
+        <input type="file" class="form-control" name="image" id="img">
+        <img src="#" id="imgPreview" alt="">
+    </div>
+    
+    <input type="hidden" name="pimage" value="<% image %>">
+    <button class="btn btn-default">Submit</button>
+</form>
+
+<hr>
+
+<h3 class="page-header">Gallery</h3>
+<ul>
+    <% galleryImages.forEach(function(image) { %>
+    <li>
+        <img src="/product_images/<%= id %>/gallery/thumbs/<%= image %>" alt="">&nbsp;
+        <a href="/admin/products/delete-image/<%= image %>?id=<%= id %>">delete</a>
+    </li>
+        <% }); %>
+</ul>
+<%- include ("../_layout/adminFooter.ejs") %>

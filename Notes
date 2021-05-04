@@ -1,0 +1,9 @@
+Entry Point : app.js
+Installed npm and express ejs.
+port = 3000
+donwloaded mongodb and setup.
+download mongoose.
+used bootstrap.
+used github body-parser.
+express-session
+express-validator
